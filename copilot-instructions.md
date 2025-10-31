@@ -1,0 +1,1 @@
+This website compares French mobile phone plans from various providers.

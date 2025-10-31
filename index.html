@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParCom - Comparateur de forfaits mobiles</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">ParCom</h1>
+            <p class="tagline">Comparez les meilleurs forfaits mobiles français</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="layout">
+                <!-- Sidebar Filters -->
+                <aside class="sidebar">
+                    <div class="filters">
+                        <h2>Filtres</h2>
+                        
+                        <!-- Provider Filter -->
+                        <div class="filter-group">
+                            <h3>Opérateur</h3>
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" class="provider-filter" value="orange" checked>
+                                    <span class="checkmark"></span>
+                                    Orange / Sosh
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="provider-filter" value="sfr" checked>
+                                    <span class="checkmark"></span>
+                                    SFR / RED
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="provider-filter" value="bouygues" checked>
+                                    <span class="checkmark"></span>
+                                    Bouygues / B&YOU
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="provider-filter" value="free" checked>
+                                    <span class="checkmark"></span>
+                                    Free
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Price Filter -->
+                        <div class="filter-group">
+                            <h3>Prix mensuel</h3>
+                            <div class="price-range">
+                                <input type="range" id="priceRange" min="0" max="100" value="100" class="slider">
+                                <div class="price-display">
+                                    <span>0€</span>
+                                    <span id="maxPrice">100€</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Filter -->
+                        <div class="filter-group">
+                            <h3>Data</h3>
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" class="data-filter" value="unlimited" checked>
+                                    <span class="checkmark"></span>
+                                    Illimité
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="data-filter" value="100+" checked>
+                                    <span class="checkmark"></span>
+                                    100 Go et plus
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="data-filter" value="50-99" checked>
+                                    <span class="checkmark"></span>
+                                    50-99 Go
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="data-filter" value="20-49" checked>
+                                    <span class="checkmark"></span>
+                                    20-49 Go
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="data-filter" value="0-19" checked>
+                                    <span class="checkmark"></span>
+                                    Moins de 20 Go
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Network Filter -->
+                        <div class="filter-group">
+                            <h3>Réseau</h3>
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" class="network-filter" value="5g" checked>
+                                    <span class="checkmark"></span>
+                                    5G incluse
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="network-filter" value="4g" checked>
+                                    <span class="checkmark"></span>
+                                    4G uniquement
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Contract Filter -->
+                        <div class="filter-group">
+                            <h3>Type d'engagement</h3>
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" class="contract-filter" value="sans-engagement" checked>
+                                    <span class="checkmark"></span>
+                                    Sans engagement
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="contract-filter" value="12-mois" checked>
+                                    <span class="checkmark"></span>
+                                    12 mois
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="contract-filter" value="24-mois" checked>
+                                    <span class="checkmark"></span>
+                                    24 mois
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="reset-filters">Réinitialiser les filtres</button>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <section class="content">
+                    <div class="toolbar">
+                        <div class="results-count">
+                            <span id="resultsCount">Chargement...</span>
+                        </div>
+                        <div class="sort-options">
+                            <label for="sortBy">Trier par :</label>
+                            <select id="sortBy">
+                                <option value="price-asc">Prix croissant</option>
+                                <option value="price-desc">Prix décroissant</option>
+                                <option value="data-desc">Data décroissant</option>
+                                <option value="provider">Opérateur</option>
+                                <option value="name">Nom du forfait</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="plans-grid" id="plansGrid">
+                        <!-- Plans will be loaded here -->
+                    </div>
+
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Chargement des forfaits...</p>
+                    </div>
+
+                    <div class="no-results" id="noResults" style="display: none;">
+                        <h3>Aucun forfait trouvé</h3>
+                        <p>Essayez d'ajuster vos filtres pour voir plus de résultats.</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 ParCom. Comparateur de forfaits mobiles français.</p>
+            <p class="disclaimer">Les prix et conditions peuvent varier. Vérifiez toujours les conditions sur le site de l'opérateur.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
